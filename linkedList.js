@@ -193,6 +193,16 @@ export class linkedlist {
         //return the result
         return result;
     }
+
+    //insert new node with value at index
+    insertAt(value, index) {
+
+    }
+
+    //remove node from prodivded index
+    removeAt(index) {
+
+    }
 }
 
 //class for node
