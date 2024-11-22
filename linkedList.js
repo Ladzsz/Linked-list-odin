@@ -1,5 +1,5 @@
 //class for linked list
-export class linkedlist {
+class linkedlist {
     constructor() {
         this.head = null; 
         this.tail = null; 
@@ -46,17 +46,17 @@ export class linkedlist {
 
     //size of list function
     sizes() {
-        console.log(this.size);
+        return this.size;
     }
 
     //return head of list function
     heads() {
-        console.log(this.head);
+        return this.head.value;
     }
 
     //return end of list function
     tails() {
-        console.log(this.tail);
+        return this.tail.value;
     }
 
     //return node at given index function
@@ -64,6 +64,7 @@ export class linkedlist {
         //if statement incase index isnt real
         if (index < 0 || index >= this.size) {
             console.log("Index does not exist.")
+            return null;
         } 
 
         //initalziing the current node and index
@@ -71,7 +72,7 @@ export class linkedlist {
         let currentIndex = 0;
 
         //while loop to find the idex
-        while (currentNode < index) {
+        while (currentIndex < index) {
             currentNode = currentNode.nextNode;
             currentIndex++;
         }
@@ -94,7 +95,7 @@ export class linkedlist {
             this.head = null;
             this.tail = null;
             this.size--;
-            return removedValue;
+            return `Removed: ${removedValue}`;
         }
 
         // Traverse to find the second-to-last node
@@ -116,7 +117,7 @@ export class linkedlist {
         this.size--;               
 
         //return the removed value
-        return removedValue;       
+        return `Removed: ${removedValue}`;       
     }
 
     //function checking if value is in the list
@@ -195,9 +196,38 @@ export class linkedlist {
 }
 
 //class for node
-export class node {
+class node {
     constructor(value, nextNode = null) {
         this.value = value;       
         this.nextNode = nextNode; 
     }
 }
+
+// example uses class syntax - adjust as necessary
+const list = new linkedlist();
+
+list.append("dog");
+list.append("cat");
+list.append("parrot");
+list.append("hamster");
+list.append("snake");
+list.append("turtle");
+list.preAppend("Human");
+
+
+console.log(list);
+
+console.log(list.heads());
+
+console.log(list.tails());
+
+console.log(list.sizes());
+
+console.log(`At: ${list.at(2)}`);
+
+console.log(`find: ${list.find("Human")}`);
+
+
+console.log(list.contains("dog"));
+
+console.log(list.toString());
