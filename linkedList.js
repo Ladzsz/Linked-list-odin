@@ -197,11 +197,92 @@ export class linkedlist {
     //insert new node with value at index
     insertAt(value, index) {
 
+        // If index is out of bounds, return an error message
+        if (index < 0 || index > this.size) {
+            console.log("Index out of bounds.");
+            return;
+        }
+
+        //making new node object
+        const newnode = new node(value);
+
+        //if list empty set head and tail to new node
+        if (!this.head) {
+            this.head = newnode;
+            this.tail = newnode;
+
+        //if inserting at the start the new node to the desired index
+        } else if (index === 0) {
+            newnode.nextNode = this.head;
+            this.head = newnode;
+
+        //if inserting anywhere other then zero
+        } else {
+            let current = this.head;
+            let currentIndex = 0;
+    
+            // Traverse the list to find the node at the specified index
+            while (currentIndex < index - 1) {
+                current = current.nextNode;
+                currentIndex++;
+            }
+    
+            // Insert the new node by adjusting the pointers
+            newnode.nextNode = current.nextNode;
+            current.nextNode = newnode;
+    
+            // If inserting at the tail, update the tail reference
+            if (current.nextNode === null) {
+                this.tail = newnode;
+            }
+        }
+
+        //incremenet list size
+        this.size++;
     }
 
     //remove node from prodivded index
     removeAt(index) {
+        // If the index is out of bounds, return an error message
+        if (index < 0 || index >= this.size) {
+            console.log("Index out of bounds.");
+            return;
+        }
 
+        // If removing the head node
+        if (index === 0) {
+            // If the list has only one node, update both head and tail
+            if (this.size === 1) {
+                this.head = null;
+                this.tail = null;
+            } else {
+                // Update the head to point to the next node
+                this.head = this.head.nextNode;
+            }
+        } else {
+            let current = this.head;
+            let currentIndex = 0;
+
+            // Traverse until the node just before the target index
+            while (currentIndex < index - 1) {
+                current = current.nextNode;
+                currentIndex++;
+            }
+
+            // current points to the node just before the one we want to remove
+            const nodeToRemove = current.nextNode;
+            
+            // Skip over the nodeToRemove
+            current.nextNode = nodeToRemove.nextNode;
+
+            // If we removed the last node (tail), update the tail
+            if (current.nextNode === null) {
+                this.tail = current;
+            }
+        }
+
+        // Decrement the size of the list
+        this.size--;
     }
 }
 
